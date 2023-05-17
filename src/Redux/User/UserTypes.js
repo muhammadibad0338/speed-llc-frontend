@@ -1,0 +1,14 @@
+export const SET_USER = "SET_USER";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const SET_LOADING = "SET_LOADING";
+export const SET_PRODUCT_LOADING = "SET_PRODUCT_LOADING";
+export const SET_ERROR = "SET_ERROR";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_LOGOUT = "USER_SET_LOGOUT";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_SINGLE_PRODUCTS = "GETSINGLEL_PRODUCTS";
+export const SET_CART = "SET_CART";
+export const ADD_QUANTITY = "ADD_QUANTITY";
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const SUB_QUANTITY = "SUB_QUANTITY";
+export const SET_CART_EMPTY = "SET_CART_EMPTY";
