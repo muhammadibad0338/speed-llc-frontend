@@ -114,6 +114,13 @@ export const setCartEmpty = () => {
     }
 }
 
+export const setProductLoading = (loading) => {
+    return {
+        type: SET_PRODUCT_LOADING,
+        payload: loading
+    };
+};
+
 
 export const loginUser = (email, password) => async (dispatch) => {
     try {
@@ -151,34 +158,63 @@ export const loginUser = (email, password) => async (dispatch) => {
 
 export const registerUser = (data) => async (dispatch) => {
     try {
-      dispatch(setLoading());
-      let res = await axios({
-        url: `${baseUrl}/auth/register`,
-        method: "POST",
-        data: data
-      });
-      await Swal.fire({
-        customClass: {
-          container: `my-swal`,
-        },
-        icon: "success",
-        title: "SPEED WORKS",
-        html: `<strong><font color="black">User Created Sucessfully</font></strong>`
-      });
-      dispatch(setLoading());
-      return res
+        dispatch(setLoading());
+        let res = await axios({
+            url: `${baseUrl}/auth/register`,
+            method: "POST",
+            data: data
+        });
+        await Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "success",
+            title: "SPEED WORKS",
+            html: `<strong><font color="black">User Created Sucessfully</font></strong>`
+        });
+        dispatch(setLoading());
+        return res
     } catch (err) {
-      Swal.fire({
-        customClass: {
-          container: `my-swal`,
-        },
-        icon: "error",
-        title: "SPEED WORKS",
-        html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data  }</font></strong>`,
-      });
-      console.log("signup", err)
-      dispatch(setErrors(err));
-      dispatch(setLoading());
-      return null
+        Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "error",
+            title: "SPEED WORKS",
+            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        });
+        console.log("signup", err)
+        dispatch(setErrors(err));
+        dispatch(setLoading());
+        return null
     }
-  };
+};
+
+
+export const setAllProducts = () => async (dispatch) => {
+    try {
+        dispatch(setProductLoading(true));
+        let token = localStorage.getItem("token");
+        let res = await axios({
+            method: "GET",
+            url: `${baseUrl}/turn14/items?page=1`,
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        await dispatch(getAllProducts(res.data.data.slice(5,21)));
+        await dispatch(setProductLoading(false));
+    } catch (err) {
+        Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "error",
+            title: "Samaan Hub",
+            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        });
+        dispatch(setErrors(err));
+        dispatch(setProductLoading(false));
+    }
+};

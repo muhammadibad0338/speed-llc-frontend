@@ -19,10 +19,11 @@ import Message from './Message';
 const styles = makeStyles((theme) => ({
     backBtn: {
         backgroundColor: 'white',
-        color: '#FF0000',
+        color: '#FF0000 !important',
         width: '50px',
         height: '60px',
-        borderRadius: '50%',
+        borderRadius: '50% ',
+        cursor:'pointer',
         "&:hover": {
             backgroundColor: 'white',
             color: '#FF0000',
@@ -54,7 +55,7 @@ const Contact = () => {
         <Container style={{ marginTop: '30px' }} >
             <Grid container style={{ margin: '20px 0px' }} >
                 <Grid item xs={12} >
-                    <Button className={classes.backBtn} variant='contained' onClick={goBack} > <ArrowBackIcon fontSize="large" /> </Button>
+                    <button className={classes.backBtn} variant='contained' onClick={goBack} > <ArrowBackIcon fontSize="large" /> </button>
                 </Grid>
 
                 <Grid item xs={12} style={{ margin: '20px 0px' }} >

@@ -12,7 +12,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { CircularProgress } from "@mui/material";
 
-
+import slider1 from "../Assets/slider1.png"
+import slider2 from "../Assets/slider2.jpg"
 
 const useStyles = makeStyles((theme) => ({
     landing: {
@@ -30,13 +31,13 @@ const useStyles = makeStyles((theme) => ({
     root: {
         overflow: "hidden !important",
         [theme.breakpoints.down("xs")]: {
-            marginTop:'5px',
+            marginTop: '5px',
 
         },
     },
     sliderImage: {
         width: '100%',
-        height:'370px',
+        height: '370px',
         [theme.breakpoints.down("md")]: {
             height: "270px",
         },
@@ -115,15 +116,7 @@ const HomeCarousell = ({ data, carousellLoading, carousell }) => {
     };
 
 
-    if (carousellLoading) {
-        return (
-            <Grid container >
-                <Grid item xs={12} style={{ backgroundColor: '#F4F4F4', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-                    <CircularProgress />
-                </Grid>
-            </Grid>
-        )
-    }
+
 
 
     return (
@@ -139,14 +132,12 @@ const HomeCarousell = ({ data, carousellLoading, carousell }) => {
                 </div>
                 <Slider ref={slider => (customSlider.current = slider)} {...settings} arrows={false}  >
                     {
-                        carousell?.map((val, index) => {
+                        [slider1, slider2].map((val, index) => {
                             return (
                                 <div key={index} className={classes.slide} onClick={() => {
-                                    if (val.product) {
-                                        navigate(`/product/${val.product}`)
-                                    }
+
                                 }} >
-                                    <img className={classes.sliderImage} src={val.image} alt='Banner' />
+                                    <img className={classes.sliderImage} src={val} alt='Banner' />
                                 </div>
                             )
                         })

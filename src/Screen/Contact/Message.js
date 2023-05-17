@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
     },
     btn: {
         padding: "10px 20px",
-        backgroundColor: "#5e6472",
-        color: "#faf3dd",
+        backgroundColor: "#5e6472 !important",
+        color: "#faf3dd !important",
         marginTop: "20px",
         marginBottom: "20px",
         borderRadius: "5px",

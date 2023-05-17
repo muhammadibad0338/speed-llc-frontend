@@ -71,30 +71,14 @@ const Footer = () => {
                     <div>
                         <Typography variant='h5' style={{ textTransform: 'uppercase' }} >NEED HELP?</Typography>
                         <Box mt={2}>
-                            <a className={classes.a} href="tel:+92 325 3570857">
+                            <a className={classes.a} href="tel:3347340509">
                                 <PhoneIcon />
                                 <Typography style={{ marginLeft: "8px", fontSize: "17px" }}>
-                                    +92 325 3570857
-                                </Typography>
-                            </a>
-                            <a className={classes.a} href="tel:+92 315 2193909">
-                                <PhoneIcon />
-                                <Typography style={{ marginLeft: "8px", fontSize: "17px" }}>
-                                    +92 315 2193909
+                                    334 734 0509
                                 </Typography>
                             </a>
 
 
-                            <a className={classes.a}
-                                onClick={() =>
-                                    window.open("mailto:samaanhubbusiness@gmail.com")
-                                }
-                            >
-                                <MailIcon />
-                                <Typography style={{ marginLeft: "8px", fontSize: "17px" }}>
-                                    samaanhubbusiness@gmail.com
-                                </Typography>
-                            </a>
                         </Box>
                     </div>
                 </Grid>
@@ -127,7 +111,7 @@ const Footer = () => {
                             <div
                                 style={{ cursor: "pointer", display: "flex", margin: "20px 10px" }}
                                 onClick={() =>
-                                    window.open("https://www.instagram.com/samaanhab/", "_blank")
+                                    window.open("https://www.instagram.com/speedworksperformance/?hl=en&_ga=2.103520000.1477238817.1684264712-943521976.1684264712", "_blank")
                                 }
                             >
                                 <img src={insta} />
@@ -135,7 +119,7 @@ const Footer = () => {
                             <div
                                 style={{ cursor: "pointer", display: "flex", margin: "20px 10px" }}
                                 onClick={() =>
-                                    window.open("https://www.facebook.com/SamaanHub-107186678573662/", "_blank")
+                                    window.open("https://www.facebook.com/speedworksperformance?_ga=2.163110076.1477238817.1684264712-943521976.1684264712", "_blank")
                                 }
                             >
                                 <img src={fb} />

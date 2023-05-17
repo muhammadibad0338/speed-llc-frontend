@@ -3,7 +3,8 @@ import {
     Grid,
     Typography,
     CircularProgress,
-    Divider
+    Divider,
+    Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -11,11 +12,14 @@ import Card from './Component/Card';
 
 
 
-import { useNavigate, useLocation,Navigate } from 'react-router';
+import { useNavigate, useLocation, Navigate } from 'react-router';
 
 import { connect } from "react-redux";
 
-// import { setAllProducts, getCategories, setLoading, getProductFilter, getCarousell } from '../../Redux/User/UserAction';
+import {
+    setAllProducts,
+    // getCategories, setLoading, getProductFilter, getCarousell
+} from '../../Redux/User/UserAction';
 import HomeCarousell from '../../Components/HomeCarousell';
 
 const styles = makeStyles((theme) => ({
@@ -39,7 +43,7 @@ const styles = makeStyles((theme) => ({
 }));
 
 const Home = ({
-    // setAllProducts,
+    setAllProducts,
     totalProducts,
     //   getCategories, getProductFilter, 
     productLoading,
@@ -55,19 +59,15 @@ const Home = ({
 
     useEffect(() => {
 
-        // if (pathname == "/") {
-        //     setAllProducts();
-        // }
-        // else {
-        //     let id = pathname.split("/")[2];
-        //     getProductFilter(id);
-        // }
+        console.log(pathname, "pathname")
+        if (pathname == "/") {
+            setAllProducts();
+        }
 
     }, [pathname])
 
-    if(!token)
-    {
-        return(
+    if (!token) {
+        return (
             <Navigate to="/login" />
         )
     }
@@ -79,20 +79,22 @@ const Home = ({
                     <HomeCarousell />
                     <Divider />
                 </Grid>
-                {(productLoading) ? <CircularProgress /> :
+                {(productLoading) ?
+                    <Box style={{ width: '100%', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} > <CircularProgress /></Box> :
                     <>
                         {
                             totalProducts.length > 0 ? totalProducts.map((val, i) => {
                                 return (
-                                    <Grid key={i} item xs={12} sm={6} md={6} lg={4}
-                                        onClick={() => navigate(`/product/${val._id}`)}
+                                    <Grid key={i} item xs={12} sm={6} md={4} lg={3}
+                                    // onClick={() => navigate(`/product/${val._id}`)}
                                     >
                                         <Card
-                                            image={val.image}
-                                            price={val.price}
-                                            id={val._id}
-                                            name={val.name}
-                                            discount={val.discountPercentage}
+                                            image={val?.attributes?.thumbnail}
+                                            // price={val?.attributes?.price}
+                                            id={val?.attributes?._id}
+                                            name={val?.attributes?.product_name}
+                                            description={val?.attributes?.part_description}
+                                        // discount={val.discountPercentage}
                                         />
                                     </Grid>
                                 )
@@ -116,7 +118,7 @@ const mapStateToProps = (store) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-    // setAllProducts: () => dispatch(setAllProducts()),
+    setAllProducts: () => dispatch(setAllProducts()),
     // getCategories: () => dispatch(getCategories()),
     // getProductFilter: (id) => dispatch(getProductFilter(id)),
     // getCarousell: () => dispatch(getCarousell())
