@@ -14,7 +14,9 @@ import {
     ADD_QUANTITY,
     REMOVE_PRODUCT,
     SUB_QUANTITY,
-    SET_CART_EMPTY
+    SET_CART_EMPTY,
+    GET_SINGLE_PRODUCTS_DATA,
+    GET_SINGLE_PRODUCTS_PRICE
 } from "./UserTypes"
 import Swal from "sweetalert2";
 
@@ -55,6 +57,20 @@ export const getProduct = (product) => {
     };
 };
 
+
+export const getCurrentProductPrice = (productPrice) => {
+    return {
+        type: GET_SINGLE_PRODUCTS_PRICE,
+        payload: productPrice,
+    };
+};
+
+export const getProductData = (product) => {
+    return {
+        type: GET_SINGLE_PRODUCTS_DATA,
+        payload: product,
+    };
+};
 
 export const setLoading = () => {
     return {
@@ -198,12 +214,13 @@ export const setAllProducts = () => async (dispatch) => {
         let res = await axios({
             method: "GET",
             url: `${baseUrl}/turn14/items?page=1`,
+            // url: `${baseUrl}/turn14/items`,
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             }
         });
-        await dispatch(getAllProducts(res.data.data.slice(5,21)));
+        await dispatch(getAllProducts(res.data.data.slice(5, 21)));
         await dispatch(setProductLoading(false));
     } catch (err) {
         Swal.fire({
@@ -211,7 +228,100 @@ export const setAllProducts = () => async (dispatch) => {
                 container: `my-swal`,
             },
             icon: "error",
-            title: "Samaan Hub",
+            title: "SPEED WORKS",
+            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        });
+        dispatch(setErrors(err));
+        dispatch(setProductLoading(false));
+    }
+};
+
+
+
+
+export const setProducts = (id) => async (dispatch) => {
+    try {
+        dispatch(setProductLoading(true));
+        let token = localStorage.getItem("token");
+        let res = await axios({
+            method: "GET",
+            url: `${baseUrl}/turn14/items/${id}`,
+            // params: id
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        // console.log(res?.data,"res?.data")
+        await dispatch(getProduct(res?.data?.data));
+        dispatch(setProductLoading(false));
+    } catch (err) {
+        Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "error",
+            title: "SPEED WORKS",
+            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        });
+        dispatch(setErrors(err));
+        dispatch(setProductLoading(false));
+    }
+};
+
+export const setProductsData = (id) => async (dispatch) => {
+    try {
+        dispatch(setProductLoading(true));
+        let token = localStorage.getItem("token");
+        let res = await axios({
+            method: "GET",
+            url: `${baseUrl}/turn14/items/data/${id}`,
+            // params: id
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        // console.log(res?.data,"res?.data")
+        await dispatch(getProductData(res?.data?.data[0]));
+        dispatch(setProductLoading(false));
+    } catch (err) {
+        Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "error",
+            title: "SPEED WORKS",
+            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        });
+        dispatch(setErrors(err));
+        dispatch(setProductLoading(false));
+    }
+};
+
+export const setCurrentProductPrice = (id) => async (dispatch) => {
+    try {
+        dispatch(setProductLoading(true));
+        let token = localStorage.getItem("token");
+        let res = await axios({
+            method: "GET",
+            url: `${baseUrl}/turn14/pricing/${id}`,
+            // params: id
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        // console.log(res?.data,"res?.data")
+        await dispatch(getCurrentProductPrice(res?.data?.data));
+        dispatch(setProductLoading(false));
+    } catch (err) {
+        Swal.fire({
+            customClass: {
+                container: `my-swal`,
+            },
+            icon: "error",
+            title: "SPEED WORKS",
             html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
         });
         dispatch(setErrors(err));

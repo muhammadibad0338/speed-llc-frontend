@@ -78,7 +78,7 @@ const styles = makeStyles((theme) => ({
         justifyContent: 'space-between'
     },
     chekoutBtn: {
-        backgroundColor: '#FF0000',
+        backgroundColor: '#FF0000 !important',
         color: 'white',
         padding: '20px',
         "&:hover": {
@@ -177,7 +177,7 @@ const Cart = ({ cart, addQuantity, subQuantity, removeCartProduct }) => {
     
 
     const goBack = () => {
-        navigate(-1)
+        navigate('/')
     }
 
    

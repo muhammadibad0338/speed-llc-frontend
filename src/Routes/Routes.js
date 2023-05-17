@@ -17,9 +17,9 @@ import { PublicRoute } from "./PublicRoute";
 import Home from '../Screen/Home/Home'
 import Signup from "../Screen/Signup/Signup";
 import Login from "../Screen/Login/Login"
-// import Product from "../Screen/Product/Product";
+import Product from "../Screen/Product/Product";
 import Cart from "../Screen/Cart/Cart";
-// import Checkout from "../Screen/Checkout/Checkout";
+import Checkout from "../Screen/Checkout/Checkout";
 import PageNotFound from "../Screen/NotFound/PageNotFound";
 import Terms from "../Screen/TermsandCondition/Terms";
 import Privacy from "../Screen/Privacy/Privacy";
@@ -28,11 +28,11 @@ import Contact from "../Screen/Contact/Contact";
 
 
 const authRoutesArr = [
-  // {
-  //   path: "/checkout",
-  //   Component: Checkout,
-  //   hideDrawer: true
-  // },
+  {
+    path: "/checkout",
+    Component: Checkout,
+    hideDrawer: true
+  },
   // {
   //   path: "/my-orders",
   //   Component: PreviousOrder,
@@ -80,11 +80,11 @@ const routesArr = [
     Component: Contact,
     hideDrawer: true
   },
-  // {
-  //   path: "/product/:id",
-  //   Component: Product,
-  //   hideDrawer: true
-  // },
+  {
+    path: "/product/:id",
+    Component: Product,
+    hideDrawer: true
+  },
   {
     path: "/cart",
     Component: Cart,

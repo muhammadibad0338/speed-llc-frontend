@@ -48,11 +48,11 @@ const useStyles = makeStyles((theme) => ({
     },
     backBtn: {
         backgroundColor: 'black !important',
-        color: 'white',
+        color: 'white !important',
     },
     forwardBtn: {
         backgroundColor: 'black !important',
-        color: 'white',
+        color: 'white !important',
     },
     btnCntnr: {
         width: '100%',

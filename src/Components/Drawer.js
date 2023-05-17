@@ -38,10 +38,17 @@ const drawerWidth = 240;
 
 const styles = makeStyles((theme) => ({
     selectedListItem: {
+        cursor:'pointer',
         borderLeft: '4px solid #FF0000 !important',
-        backgroundColor: '#EDEDED !important'
+        backgroundColor: '#EDEDED !important',
+        borderRadius: '10px !important',
+        
     },
     notSelectedListItem: {
+        cursor:'pointer',
+        "&:hover": {
+            borderBottom: '4px solid #FF0000 !important'
+        },
     },
     cartLengthChip: {
         fontSize: '13px',
@@ -117,35 +124,37 @@ function ResponsiveDrawer(props) {
         <div style={{ height: 'inherit', position: 'relative', display: 'flex', flexDirection: 'column' }} >
             <Toolbar />
             <Divider />
-            <List style={{ marginTop: '10px' }} >
+            <List style={{ marginTop: '10px', padding: '0px 10px' }} >
                 <ListItem sx={{ display: { xs: 'block', sm: 'none' } }} >
                     <img className={classes.logo} src={logo} onClick={() => navigate('/')} />
                 </ListItem>
                 <ListItem >
-                    <Typography style={{ fontWeight: 'bold', textTransform: 'uppercase' }} variant="h6" >Category</Typography>
+                    <Typography style={{ fontWeight: 'bold', textTransform: 'uppercase', color: "#FF0000" }} variant="h5" >Category</Typography>
                 </ListItem>
                 {categories?.map((name, index) => {
                     return (
-                        <ListItem button className={ catId === index ? classes.selectedListItem : ""} key={index} onClick={() => {
+                        <ListItem className={catId === index ? classes.selectedListItem : classes.notSelectedListItem} key={index} onClick={() => {
                             setCatId(index)
                         }
                         }
                         // className={catId == _id ? classes.selectedListItem : null}
                         >
 
-                            <ListItemText primary={name} />
+                            <p style={{ fontSize: '16px', fontWeight: 'bold' }} >
+                                {name}
+                            </p>
                         </ListItem>
                     )
                 }
                 )}
             </List>
             <List style={{ marginBottom: '0px', position: 'fixed', width: drawerWidth, bottom: 0, backgroundColor: '#F7F7F7', borderTop: '1px solid #D9D9D9', borderRight: "1px solid #D9D9D9" }} >
-                <ListItem button onClick={() => navigate('/my-orders')} >
+                {/* <ListItem button onClick={() => navigate('/my-orders')} >
                     <ListItemIcon>
                         <HistoryIcon />
                     </ListItemIcon>
                     <ListItemText primary='Previous Orders' />
-                </ListItem>
+                </ListItem> */}
                 {(localStorage.getItem('uid') || uidState) ? <ListItem button onClick={() => {
                     localStorage.removeItem('token')
                     localStorage.removeItem('uid')

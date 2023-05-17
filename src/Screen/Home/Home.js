@@ -86,7 +86,7 @@ const Home = ({
                             totalProducts.length > 0 ? totalProducts.map((val, i) => {
                                 return (
                                     <Grid key={i} item xs={12} sm={6} md={4} lg={3}
-                                    // onClick={() => navigate(`/product/${val._id}`)}
+                                        onClick={() => navigate(`/product/${val.id}`)}
                                     >
                                         <Card
                                             image={val?.attributes?.thumbnail}

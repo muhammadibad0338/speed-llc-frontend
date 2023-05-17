@@ -19,7 +19,7 @@ const styles = makeStyles((theme) => ({
         // display: 'block',
         marginLeft: 'auto',
         marginRight: 'auto',
-        
+
     },
     productCard: {
         borderRadius: '25px',
@@ -33,8 +33,8 @@ const styles = makeStyles((theme) => ({
         flexDirection: "column !important",
         // justifyContent: 'center',
         alignItems: 'center',
-        outline:'2px solid #FF0000',
-        padding:'10px',
+        outline: '2px solid #FF0000',
+        padding: '10px',
         "&:hover": {
             boxShadow: "0 2px 5px 0 rgba(0, 0, 0, .25), 0 3px 10px 4px rgba(0, 0, 0, 0.5) !important;",
             // transform: 'scale(1.1)',
@@ -46,6 +46,11 @@ const styles = makeStyles((theme) => ({
     postBtn: {
         backgroundColor: "#FF0000 !important",
         color: "white !important",
+        border:'none',
+        borderRadius:'5px',
+        fontSize:'15px',
+        cursor:'pointer',
+        padding:'15px 20px',
         marginLeft: 'auto',
         "&:hover": {
             backgroundColor: "#FF0000 !important",
@@ -74,7 +79,7 @@ const Card = (props) => {
     }
 
     return (
-        <Box  className={classes.productCard} >
+        <Box className={classes.productCard} >
 
             <img className={classes.prodctImage} src={props?.image} alt="Product Image" />
 
@@ -89,11 +94,11 @@ const Card = (props) => {
                     my: 1,
                 }}
             >
-                <Typography variant='h5' style={{ margin: '10px 0px', color: '#FF0000' }}  >{props?.name}</Typography>
+                <Typography variant='h5' style={{ margin: '10px 0px', color: 'Black', fontWeight: 'bold' }}  >{props?.name}</Typography>
 
             </Box>
             <Box>
-                <Typography variant='h6' style={{ margin: '10px 0px' }}  >{props?.name}</Typography>
+                <Typography style={{ margin: '10px 0px', fontSize: '16px',textAlign:'center',color:'gray' }}  >{props?.description}</Typography>
             </Box>
             {/* <Box style={{ margin: '0px 24px' }} >
                 {props?.discount == 0 && <Typography variant="h6" className={classes.price} >
@@ -101,9 +106,9 @@ const Card = (props) => {
                 </Typography>}
             </Box> */}
             <Box style={{ display: "flex" }} mr={3}  >
-                <Button onClick={() => navigate(`/product/${props.id}`)} className={classes.postBtn} >
+                <button onClick={() => navigate(`/product/${props.id}`)} className={classes.postBtn} >
                     View
-                </Button>
+                </button>
             </Box>
         </Box>
     )

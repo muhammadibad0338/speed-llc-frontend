@@ -12,7 +12,9 @@ import {
     ADD_QUANTITY,
     REMOVE_PRODUCT,
     SUB_QUANTITY,
-    SET_CART_EMPTY
+    SET_CART_EMPTY,
+    GET_SINGLE_PRODUCTS_DATA,
+    GET_SINGLE_PRODUCTS_PRICE
 }
     from "./UserTypes"
 
@@ -28,6 +30,8 @@ const initialState = {
     users: {},
     products: [],
     product: {},
+    productData: {},
+    currentProductPrice: {},
     cart: [],
     categories: [],
     productLoading: false,
@@ -47,9 +51,9 @@ const userReducer = (state = initialState, action) => {
                 loading: false,
             };
         case SET_CURRENT_USER:
-            return{
+            return {
                 ...state,
-                currentUser:payload
+                currentUser: payload
             }
         case SET_CART:
             return {
@@ -57,9 +61,9 @@ const userReducer = (state = initialState, action) => {
                 cart: [...state.cart, payload]
             }
         case SET_CART_EMPTY:
-            return{
+            return {
                 ...state,
-                cart:[]
+                cart: []
             }
         case ADD_QUANTITY:
             return {
@@ -72,7 +76,7 @@ const userReducer = (state = initialState, action) => {
                         }
                     }
                     else {
-                        return {...val}
+                        return { ...val }
                     }
                 })
             }
@@ -81,29 +85,28 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 cart: state.cart.map((val, i) => {
                     if (i == payload) {
-                        if(val?.quantity > 1)
-                        {
+                        if (val?.quantity > 1) {
                             return {
                                 ...val,
                                 quantity: val.quantity - 1
                             }
                         }
-                        else{
-                            return {...val}
+                        else {
+                            return { ...val }
                         }
                     }
                     else {
-                        return {...val}
+                        return { ...val }
                     }
                 })
             }
         case REMOVE_PRODUCT:
-        return {
-            ...state,
-            cart: state.cart.filter((val,i)=>{
-                return i !== payload
-            })
-        }
+            return {
+                ...state,
+                cart: state.cart.filter((val, i) => {
+                    return i !== payload
+                })
+            }
         case GET_ALL_PRODUCTS:
             return {
                 ...state,
@@ -114,6 +117,16 @@ const userReducer = (state = initialState, action) => {
                 ...state,
                 product: payload
             }
+        case GET_SINGLE_PRODUCTS_DATA:
+            return {
+                ...state,
+                productData: payload
+            }
+        case GET_SINGLE_PRODUCTS_PRICE:
+            return {
+                ...state,
+                currentProductPrice: payload
+            }
         case SET_LOADING:
             return {
                 ...state,
@@ -121,10 +134,10 @@ const userReducer = (state = initialState, action) => {
                 error: null,
             };
         case SET_PRODUCT_LOADING:
-            return{
+            return {
                 ...state,
-                productLoading:payload,
-                error:null,
+                productLoading: payload,
+                error: null,
             }
         case SET_ERROR:
             return {
@@ -140,7 +153,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 data: {},
-                cart:[],
+                cart: [],
                 updating: false,
                 logged: false,
                 loading: false,
