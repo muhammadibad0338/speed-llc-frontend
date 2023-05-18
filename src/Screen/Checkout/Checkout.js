@@ -27,9 +27,9 @@ const styles = makeStyles((theme) => ({
     },
     placeOrderBtn: {
         backgroundColor: '#FF0000',
-        border:'none',
-        borderRadius:'10px',
-        cursor:'pointer',
+        border: 'none',
+        borderRadius: '10px',
+        cursor: 'pointer',
         color: 'white',
         padding: '20px',
         marginTop: '50px',
@@ -117,7 +117,8 @@ const BootstrapInput = withStyles((theme) => ({
 
 const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
     // confirmCheckout,
-    setCartEmpty }) => {
+    setCartEmpty
+}) => {
 
     const classes = styles();
     const navigate = useNavigate();
@@ -177,7 +178,7 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
         }
         else {
 
-            if (address.trim().length == 0 || phoneno.length == 0 || shippingAddress.trim().length == 0 || postalCode.trim().length == 0) {
+            if (address.trim().length == 0 || phoneno.length == 0 || shippingAddress.trim().length == 0 ) {
                 Swal.fire({
                     customClass: {
                         container: `my-swal`,
@@ -204,6 +205,17 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                             quantity: val.quantity,
                             product: val.product
                         }
+                    })
+                    Swal.fire({
+                        customClass: {
+                            container: `my-swal`,
+                        },
+                        icon: "success",
+                        title: "SPEED WORKS",
+                        html: `<strong><font color="black">Order Place Successfully</font></strong>`,
+                    }).then(res => {
+                        setCartEmpty();
+                        navigate('/')
                     })
                     // confirmCheckout({
                     //     orderItems: orderItems,
@@ -237,19 +249,20 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
 
 
     const validatePhone = (e) => {
-        let phonenumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         let number = e.target.value;
-        let lastNumber = Array.from(number)[number.length - 1];
-        if (number.length == 0) {
-            setphoneno(number)
-        }
-        else {
-            if (number.length <= 11) {
-                if (phonenumber.includes(Number(lastNumber))) {
-                    setphoneno(number)
-                }
-            }
-        }
+        setphoneno(number)
+        // let phonenumber = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        // let lastNumber = Array.from(number)[number.length - 1];
+        // if (number.length == 0) {
+        //     setphoneno(number)
+        // }
+        // else {
+        //     if (number.length <= 11) {
+        //         if (phonenumber.includes(Number(lastNumber))) {
+        //             setphoneno(number)
+        //         }
+        //     }
+        // }
 
     }
 
@@ -272,7 +285,7 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                             </Box>
                         </Grid>
                         <Grid xs={12} md={12}>
-                            <Box m={2} style={{ width: "auto", margin:'20px 0px' }}>
+                            <Box m={2} style={{ width: "auto", margin: '20px 0px' }}>
                                 <Typography style={{ fontSize: "12px", marginLeft: "3px" }}>
                                     Phone Number (Not convertable eg:- 03199999999) *
                                 </Typography>
@@ -288,7 +301,7 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                             </Box>
                         </Grid>
                         <Grid xs={12} md={12}>
-                            <Box m={2} style={{ width: "auto", margin:'20px 0px' }}>
+                            <Box m={2} style={{ width: "auto", margin: '20px 0px' }}>
                                 <Typography style={{ fontSize: "12px", marginLeft: "3px" }}>
                                     Shipping Address 1 *
                                 </Typography>
@@ -305,8 +318,8 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                                 />
                             </Box>
                         </Grid>
-                        <Grid xs={12} md={12} style={{marginBottom:'20px'}} >
-                            <Box m={2} style={{ width: "auto", margin:'20px 0px' }}>
+                        <Grid xs={12} md={12} style={{ marginBottom: '20px' }} >
+                            <Box m={2} style={{ width: "auto", margin: '20px 0px' }}>
                                 <Typography style={{ fontSize: "12px", marginLeft: "3px" }}>
                                     Shipping Address 2 *
                                 </Typography>
@@ -343,7 +356,7 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                             </Box>
                         </Grid> */}
 
-                        <Grid item xs={12} md={6} style={{paddingRight:'50px'}} >
+                        <Grid item xs={12} md={6} style={{ paddingRight: '50px' }} >
                             <Box m={2} style={{ width: "auto" }}>
                                 <Typography style={{ fontSize: "12px", marginLeft: "3px" }}>
                                     Country
@@ -364,7 +377,7 @@ const Checkout = ({ openDialog, setOpenDialog, currentUser, cart,
                             </Box>
                         </Grid>
 
-                        <Grid item xs={12} md={6} style={{paddingLeft:'50px'}} >
+                        <Grid item xs={12} md={6} style={{ paddingLeft: '50px' }} >
                             <Box m={2} style={{ width: "auto" }}>
                                 <Typography style={{ fontSize: "12px", marginLeft: "3px" }}>
                                     City

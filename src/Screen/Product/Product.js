@@ -7,7 +7,8 @@ import {
     Button,
     Container,
     CircularProgress,
-    Hidden
+    Hidden,
+    Chip
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -26,29 +27,32 @@ import { setProducts, setCart, getProduct, setProductsData, setCurrentProductPri
 
 const styles = makeStyles((theme) => ({
     backBtn: {
-        backgroundColor: 'white',
-        color: '#FF0000',
+        backgroundColor: 'white !important',
+        color: '#FF0000 !important',
         width: '50px',
         height: '60px',
-        borderRadius: '50%',
+        borderRadius: '50% !important',
         "&:hover": {
-            backgroundColor: 'white',
-            color: '#FF0000',
+            backgroundColor: 'white !important',
+            color: '#FF0000 !important',
         }
     },
     productName: {
         color: '#242424',
-        fontWeight: 'bold',
-        marginBottom: '10px'
+        fontWeight: 'bold !important',
+        fontSize: '3rem !important',
+        marginBottom: '10px',
     },
     price: {
         color: '#FF0000',
-        fontWeight: "bold",
+        fontWeight: "bold !important",
+        fontSize: '2rem !important',
         margin: '5px 0px'
     },
     heading: {
         color: '#242424',
         fontWeight: 'bold',
+        fontSize: '1.5rem !important',
         textTransform: 'uppercase'
     },
     fullDivider: {
@@ -65,8 +69,8 @@ const styles = makeStyles((theme) => ({
         marginTop: '10px'
     },
     addToCart: {
-        border: '1px solid #FF0000',
-        color: '#FF0000',
+        border: '3px solid #FF0000 !important',
+        color: '#FF0000 !important',
         [theme.breakpoints.down("sm")]: {
             width: '50%',
             padding: '7% 10%'
@@ -76,9 +80,9 @@ const styles = makeStyles((theme) => ({
         }
     },
     alreadyAddToCart: {
-        border: '1px solid white',
-        backgroundColor: '#FF0000',
-        color: 'white',
+        border: '1px solid white !important',
+        backgroundColor: '#FF0000 !important',
+        color: 'white !important',
         [theme.breakpoints.down("sm")]: {
             width: '50%',
             padding: '7% 10%'
@@ -93,8 +97,9 @@ const styles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'flex-end',
         flexWrap: 'wrap',
+        marginTop: '40px !important',
         [theme.breakpoints.down("sm")]: {
-            marginTop: '20px',
+            marginTop: '20px !important',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -110,10 +115,11 @@ const styles = makeStyles((theme) => ({
         maxHeight: '430px',
         maxWidth: '85%',
         width: 'auto',
-
+        borderRadius: '20px !important',
         [theme.breakpoints.down("xs")]: {
             width: '100%',
             height: 'auto',
+            borderRadius: '5px !important'
         },
     }
 }));
@@ -226,11 +232,11 @@ const Product = ({ setProductsData, currentProductData, loading, setCart, cart, 
         return perc / remainPerc;
     }
 
-    if (loading) {
-        return <Container style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-            <CircularProgress />
-        </Container>
-    }
+    // if (loading) {
+    //     return <Container style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+    //         <CircularProgress />
+    //     </Container>
+    // }
 
     return (
         <Container style={{ marginTop: '30px' }} >
@@ -240,51 +246,52 @@ const Product = ({ setProductsData, currentProductData, loading, setCart, cart, 
                     <Button className={classes.backBtn} variant='contained' onClick={goBack} > <ArrowBackIcon fontSize="large" /> </Button>
                 </Grid>
                 <Grid item xs={12}  >
-                    <Hidden mdUp >
-                        <Typography variant='h5' style={{ color: "#6C757D", marginTop: '20px' }}>
-                            <Link style={{ color: "#007BFF", textDecoration: "none", marginRight: '7px' }} to="/">
-                                Home /
-                            </Link>
-                            Products / {id}
-                        </Typography>
-                    </Hidden>
+                    {/* <Hidden mdUp > */}
+                    <Typography variant='h5' style={{ color: "#6C757D", marginTop: '20px' }}>
+                        <Link style={{ textDecoration: "none", marginRight: '7px' }} to="/">
+                            Home /
+                        </Link>
+                        Products /  <spam style={{ color: '#FF0000' }} >{id}</spam>
+                    </Typography>
+                    {/* </Hidden> */}
                 </Grid>
 
             </Grid>
-            {Object.keys(currentProductData)?.length == 0 ? <CircularProgress /> :
+            {
+                Object.keys(currentProductData)?.length == 0
+                    ? <CircularProgress /> :
 
-                <Grid container style={{ margin: '20px 0px' }} >
-                    <Grid item xs={12} md={6} className={classes.productSlider} >
+                    <Grid container style={{ margin: '20px 0px' }} >
+                        <Grid item xs={12} md={6} className={classes.productSlider} >
 
-                        <Box style={{ display: 'flex', justifyContent: 'center' }}>
-                            <img className={classes.productImage} src={currentProductData?.files[0]?.links[0]?.url} />
-                        </Box>
+                            <Box style={{ display: 'flex', justifyContent: 'center' }}>
+                                <img className={classes.productImage} src={currentProductData?.files[0]?.links[0]?.url} />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={12} md={6} style={{ marginTop: '30px' }}  >
+                            <Typography variant='h4' className={classes.productName} >{currentProduct?.attributes?.product_name}.</Typography>
+                            <Typography variant="h6" className={classes.price} >
+                                $ {currentProductPricing?.attributes?.pricelists[0]?.price}
+                            </Typography>
+                            <Divider className={classes.fullDivider} />
+                            <Typography className={classes.heading} style={{ marginTop: '20px' }} > Description </Typography>
+                            <Divider className={classes.smallDivider} />
+                            <Typography style={{ margin: '15px 0px' }} >
+                                {currentProduct?.attributes?.part_description}.
+                            </Typography>
+                            <Box className={classes.btnCntnr}  >
+                                {isAlreadyAddedtoCart(currentProduct.id) ? <Button className={classes.alreadyAddToCart}  >Already exist In Cart</Button> :
+                                    <Button variant='outlined' className={classes.addToCart} startIcon={<ShoppingCartOutlinedIcon />}
+                                        onClick={() => addToCart(currentProduct.id, currentProduct?.attributes?.product_name, currentProduct?.attributes?.thumbnail, currentProductPricing?.attributes?.pricelists[0]?.price)} >Add to cart</Button>
+                                }
+
+                            </Box>
+                            <div style={{ margin: '30px 0px', display: 'flex' }} >
+                                <Typography style={{ fontWeight: 'bold', fontSize: '18px', marginRight: '20px' }} >Category:</Typography>
+                                <Chip label={currentProduct?.attributes?.category} />
+                            </div>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} md={6} style={{ marginTop: '30px' }}  >
-                        <Typography variant='h4' className={classes.productName} >{currentProduct?.attributes?.product_name}.</Typography>
-                        <Typography variant="h6" className={classes.price} >
-                            Rs. {currentProductPricing?.attributes?.pricelists[0]?.price}
-                        </Typography>
-                        {/* {currentProduct?.discountPercentage > 0 && <Typography variant='h6' style={{ fontWeight: 'bold' }} >
-                            <span style={{ color: 'gray', textDecorationLine: 'line-through', fontWeight: 'bold' }} >Rs. {calculateWithoutDiscount(currentProduct.discountPercentage, currentProduct?.price)}</span>
-                            <span style={{ marginLeft: '10px' }} > Rs. {currentProduct.price} </span> </Typography>} */}
-                        <Divider className={classes.fullDivider} />
-                        <Typography className={classes.heading} style={{ marginTop: '20px' }} > Description </Typography>
-                        <Divider className={classes.smallDivider} />
-                        <Typography style={{ margin: '15px 0px' }} >
-                            {currentProduct?.attributes?.part_description}.
-                        </Typography>
-                        <Box className={classes.btnCntnr} >
-                            {isAlreadyAddedtoCart(currentProduct.id) ? <Button className={classes.alreadyAddToCart}  >Already exist</Button> : <Button variant='outlined' className={classes.addToCart} startIcon={<ShoppingCartOutlinedIcon />}
-                                onClick={() => addToCart(currentProduct.id, currentProduct?.attributes?.product_name, currentProduct?.attributes?.thumbnail, currentProductPricing?.attributes?.pricelists[0]?.price)} >Add to cart</Button>
-                            }
-                            {/* {isAlreadyAddedtoCart(currentProduct.id) ? <Button className={classes.alreadyAddToCart}  >Already exist</Button> : <Button variant='outlined' className={classes.addToCart} startIcon={<ShoppingCartOutlinedIcon />}
-                                onClick={() => buyAllStock(currentProduct.id, currentProduct?.attributes?.product_name, currentProduct?.attributes?.thumbnail, currentProduct.price, currentProduct?.countInStock)} >Buy All Stock</Button>
-                            } */}
-
-                        </Box>
-                    </Grid>
-                </Grid>
             }
         </Container>
     )

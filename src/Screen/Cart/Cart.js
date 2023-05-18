@@ -30,7 +30,7 @@ const styles = makeStyles((theme) => ({
     },
     chekoutCart: {
         width: '100%',
-        height: '260px',
+        height: '230px !important',
         backgroundColor: '#FFFFFF',
         borderRadius: '10px',
         boxShadow: "0 0.5rem 1rem rgb(0 0 0 / 15%)",
@@ -48,15 +48,15 @@ const styles = makeStyles((theme) => ({
         },
     },
     firstDivider: {
-        marginBottom: '20px',
+        marginBottom: '20px !important',
     },
     secondDivider: {
-        margin: '20px 0px'
+        margin: '20px 0px !important'
     },
     itemImage: {
         width: '100%',
         height: '150px',
-        borderRadius: '10px',
+        borderRadius: '10px !important',
         [theme.breakpoints.down("sm")]: {
             height: '100px',
         },
@@ -66,7 +66,9 @@ const styles = makeStyles((theme) => ({
         fontWeight: 'bold',
     },
     iconBtn: {
-        border: '1px solid #FE0000'
+        border: '1px solid #FE0000 !important',
+        borderRadius:'50% !important',
+        padding:'5px !important'
     },
     itemDetails: {
         display: 'flex',
@@ -79,22 +81,22 @@ const styles = makeStyles((theme) => ({
     },
     chekoutBtn: {
         backgroundColor: '#FF0000 !important',
-        color: 'white',
-        padding: '20px',
+        color: 'white !important',
+        padding: '13px 20px !important',
         "&:hover": {
-            color: 'white',
-            backgroundColor: '#FF0000',
+            color: 'white !important',
+            backgroundColor: '#FF0000 !important',
         },
     },
     backBtn: {
-        backgroundColor: 'white',
-        color: '#FF0000',
+        backgroundColor: 'white !important',
+        color: '#FF0000 !important',
         width: '50px',
         height: '60px',
-        borderRadius: '50%',
+        borderRadius: '50% !important',
         "&:hover": {
-            backgroundColor: 'white',
-            color: '#FF0000',
+            backgroundColor: 'white !important',
+            color: '#FF0000 !important',
         }
     },
     emptyCart: {
@@ -141,7 +143,7 @@ const Item = (props) => {
             </Grid>
             <Grid item xs={7} md={8} className={classes.itemDetails} style={{ padding: '5px 10px' }} >
                 <Typography>{props?.caption}</Typography>
-                <Typography variant="h6" className={classes.itemPrice} >Rs. {props?.price * props?.quantity}</Typography>
+                <Typography variant="h6" className={classes.itemPrice} >$ {props?.price * props?.quantity}</Typography>
                 <div style={{ display: 'flex', alignItems: 'center' }} >
                     <IconButton className={classes.iconBtn} size='small'
                         onClick={() => props?.removeItem()
@@ -245,10 +247,6 @@ const Cart = ({ cart, addQuantity, subQuantity, removeCartProduct }) => {
                                         <div className={classes.alignItem} >
                                             <Typography>Total Amount</Typography>
                                             <Typography>{totalAmount(cart)}</Typography>
-                                        </div>
-                                        <div className={classes.alignItem} >
-                                            <Typography>Delivery charges</Typography>
-                                            <Typography>Free Delivery</Typography>
                                         </div>
                                         <div className={classes.alignItem} >
                                             <Typography>Total Amount</Typography>
