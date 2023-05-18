@@ -80,7 +80,10 @@ const Home = ({
                     <Divider />
                 </Grid>
                 {(productLoading) ?
-                    <Box style={{ width: '100%', height: '500px', display: 'flex', justifyContent: 'center', alignItems: 'center' }} > <CircularProgress /></Box> :
+                    <Box style={{ width: '100%', height: '500px', display: 'flex',flexFlow:'column' ,justifyContent: 'center', alignItems: 'center' }} >
+                        <img src='https://www.speedworksllc.com/wp-content/uploads/2023/01/preloader.gif' style={{ width: '200px', height: '350px',marginBottom:'20px' }} />
+                        <CircularProgress />
+                    </Box> :
                     <>
                         {
                             totalProducts.length > 0 ? totalProducts.map((val, i) => {

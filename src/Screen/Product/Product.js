@@ -232,11 +232,12 @@ const Product = ({ setProductsData, currentProductData, loading, setCart, cart, 
         return perc / remainPerc;
     }
 
-    // if (loading) {
-    //     return <Container style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
-    //         <CircularProgress />
-    //     </Container>
-    // }
+    if (loading) {
+        return <Container style={{ height: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+            <img src='https://www.speedworksllc.com/wp-content/uploads/2023/01/preloader.gif' style={{ width: '200px', height: '350px', marginBottom: '20px' }} />
+            <CircularProgress />
+        </Container>
+    }
 
     return (
         <Container style={{ marginTop: '30px' }} >

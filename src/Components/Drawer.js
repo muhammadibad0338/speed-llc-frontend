@@ -38,14 +38,14 @@ const drawerWidth = 240;
 
 const styles = makeStyles((theme) => ({
     selectedListItem: {
-        cursor:'pointer',
+        cursor: 'pointer',
         borderLeft: '4px solid #FF0000 !important',
         backgroundColor: '#EDEDED !important',
         borderRadius: '10px !important',
-        
+
     },
     notSelectedListItem: {
-        cursor:'pointer',
+        cursor: 'pointer',
         "&:hover": {
             borderBottom: '4px solid #FF0000 !important'
         },
@@ -116,7 +116,7 @@ function ResponsiveDrawer(props) {
         }
     }, [])
 
-    let categories = ['Batteries/Charges', 'Brakes', 'Engine', 'Fuel', 'Head/Porting Services']
+    let categories = ['ALL', 'Batteries/Charges', 'Brakes', 'Engine', 'Fuel', 'Head/Porting Services']
 
 
 
@@ -134,7 +134,7 @@ function ResponsiveDrawer(props) {
                 {categories?.map((name, index) => {
                     return (
                         <ListItem className={catId === index ? classes.selectedListItem : classes.notSelectedListItem} key={index} onClick={() => {
-                            setCatId(index)
+                            // setCatId(index)
                         }
                         }
                         // className={catId == _id ? classes.selectedListItem : null}
