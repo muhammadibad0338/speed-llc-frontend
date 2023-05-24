@@ -256,14 +256,14 @@ export const setProducts = (id) => async (dispatch) => {
         await dispatch(getProduct(res?.data?.data));
         dispatch(setProductLoading(false));
     } catch (err) {
-        Swal.fire({
-            customClass: {
-                container: `my-swal`,
-            },
-            icon: "error",
-            title: "SPEED WORKS",
-            html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
-        });
+        // Swal.fire({
+        //     customClass: {
+        //         container: `my-swal`,
+        //     },
+        //     icon: "error",
+        //     title: "SPEED WORKS",
+        //     html: `<strong><font color="black">${err?.response?.data?.message || err?.response?.data}</font></strong>`,
+        // });
         dispatch(setErrors(err));
         dispatch(setProductLoading(false));
     }
